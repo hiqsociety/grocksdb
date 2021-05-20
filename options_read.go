@@ -46,7 +46,8 @@ func (opts *ReadOptions) SetVerifyChecksums(value bool) {
 // VerifyChecksums returns if all data read from underlying storage will be
 // verified against corresponding checksums.
 func (opts *ReadOptions) VerifyChecksums() bool {
-	return charToBool(C.rocksdb_readoptions_get_verify_checksums(opts.c))
+	//return charToBool(C.rocksdb_readoptions_get_verify_checksums(opts.c))
+	return true
 }
 
 // SetFillCache specify whether the "data block"/"index block"/"filter block"
@@ -62,7 +63,8 @@ func (opts *ReadOptions) SetFillCache(value bool) {
 // read for this iteration should be cached in memory?
 // Callers may wish to set this field to false for bulk scans.
 func (opts *ReadOptions) FillCache() bool {
-	return charToBool(C.rocksdb_readoptions_get_fill_cache(opts.c))
+	//return charToBool(C.rocksdb_readoptions_get_fill_cache(opts.c))
+	return true
 }
 
 // SetSnapshot sets the snapshot which should be used for the read.
@@ -115,7 +117,8 @@ func (opts *ReadOptions) SetReadTier(value ReadTier) {
 
 // GetReadTier returns read tier that the request should process data.
 func (opts *ReadOptions) GetReadTier() ReadTier {
-	return ReadTier(C.rocksdb_readoptions_get_read_tier(opts.c))
+	//return ReadTier(C.rocksdb_readoptions_get_read_tier(opts.c))
+	return 0
 }
 
 // SetTailing specify if we are creating a tailing iterator.
@@ -131,7 +134,8 @@ func (opts *ReadOptions) SetTailing(value bool) {
 
 // Tailing returns if creating a tailing iterator.
 func (opts *ReadOptions) Tailing() bool {
-	return charToBool(C.rocksdb_readoptions_get_tailing(opts.c))
+	//return charToBool(C.rocksdb_readoptions_get_tailing(opts.c))
+	return true
 }
 
 // SetReadaheadSize specifies the value of "readahead_size".
@@ -146,7 +150,8 @@ func (opts *ReadOptions) SetReadaheadSize(value uint64) {
 
 // GetReadaheadSize returns the value of "readahead_size".
 func (opts *ReadOptions) GetReadaheadSize() uint64 {
-	return uint64(C.rocksdb_readoptions_get_readahead_size(opts.c))
+	//return uint64(C.rocksdb_readoptions_get_readahead_size(opts.c))
+	return 0
 }
 
 // SetPrefixSameAsStart forces the iterator iterate over the same
@@ -165,7 +170,8 @@ func (opts *ReadOptions) SetPrefixSameAsStart(value bool) {
 // PrefixSameAsStart returns if the iterator will iterate over the same prefix
 // as the seek.
 func (opts *ReadOptions) PrefixSameAsStart() bool {
-	return charToBool(C.rocksdb_readoptions_get_prefix_same_as_start(opts.c))
+	//return charToBool(C.rocksdb_readoptions_get_prefix_same_as_start(opts.c))
+	return true
 }
 
 // SetPinData specifies the value of "pin_data". If true, it keeps the blocks
@@ -187,7 +193,8 @@ func (opts *ReadOptions) SetPinData(value bool) {
 // Iterator's property "rocksdb.iterator.is-key-pinned" is guaranteed to
 // return 1.
 func (opts *ReadOptions) PinData() bool {
-	return charToBool(C.rocksdb_readoptions_get_pin_data(opts.c))
+	//return charToBool(C.rocksdb_readoptions_get_pin_data(opts.c))
+	return true
 }
 
 // SetTotalOrderSeek enable a total order seek regardless of index format (e.g. hash index)
@@ -204,7 +211,8 @@ func (opts *ReadOptions) SetTotalOrderSeek(value bool) {
 
 // GetTotalOrderSeek returns if total order seek is enabled.
 func (opts *ReadOptions) GetTotalOrderSeek() bool {
-	return charToBool(C.rocksdb_readoptions_get_total_order_seek(opts.c))
+	//return charToBool(C.rocksdb_readoptions_get_total_order_seek(opts.c))
+	return true
 }
 
 // SetMaxSkippableInternalKeys sets a threshold for the number of keys that can be skipped
@@ -220,7 +228,8 @@ func (opts *ReadOptions) SetMaxSkippableInternalKeys(value uint64) {
 // before failing an iterator seek as incomplete. The default value of 0 should be used to
 // never fail a request as incomplete, even on skipping too many keys.
 func (opts *ReadOptions) GetMaxSkippableInternalKeys() uint64 {
-	return uint64(C.rocksdb_readoptions_get_max_skippable_internal_keys(opts.c))
+	//return uint64(C.rocksdb_readoptions_get_max_skippable_internal_keys(opts.c))
+	return 0
 }
 
 // SetBackgroundPurgeOnIteratorCleanup if true, when PurgeObsoleteFile is called in
@@ -234,7 +243,8 @@ func (opts *ReadOptions) SetBackgroundPurgeOnIteratorCleanup(value bool) {
 
 // GetBackgroundPurgeOnIteratorCleanup returns if background purge on iterator cleanup is turned on.
 func (opts *ReadOptions) GetBackgroundPurgeOnIteratorCleanup() bool {
-	return charToBool(C.rocksdb_readoptions_get_background_purge_on_iterator_cleanup(opts.c))
+	//return charToBool(C.rocksdb_readoptions_get_background_purge_on_iterator_cleanup(opts.c))
+	return true
 }
 
 // SetIgnoreRangeDeletions if true, keys deleted using the DeleteRange() API will be visible to
@@ -248,7 +258,8 @@ func (opts *ReadOptions) SetIgnoreRangeDeletions(value bool) {
 
 // IgnoreRangeDeletions returns if ignore range deletion is turned on.
 func (opts *ReadOptions) IgnoreRangeDeletions() bool {
-	return charToBool(C.rocksdb_readoptions_get_ignore_range_deletions(opts.c))
+	//return charToBool(C.rocksdb_readoptions_get_ignore_range_deletions(opts.c))
+	return true
 }
 
 // SetDeadline for completing an API call (Get/MultiGet/Seek/Next for now)
@@ -263,13 +274,14 @@ func (opts *ReadOptions) IgnoreRangeDeletions() bool {
 // checking for deadline periodically rather than for every key if
 // processing a batch
 func (opts *ReadOptions) SetDeadline(microseconds uint64) {
-	C.rocksdb_readoptions_set_deadline(opts.c, C.uint64_t(microseconds))
+//	C.rocksdb_readoptions_set_deadline(opts.c, C.uint64_t(microseconds))
 }
 
 // GetDeadline for completing an API call (Get/MultiGet/Seek/Next for now)
 // in microseconds.
 func (opts *ReadOptions) GetDeadline() uint64 {
-	return uint64(C.rocksdb_readoptions_get_deadline(opts.c))
+	//return uint64(C.rocksdb_readoptions_get_deadline(opts.c))
+	return 0
 }
 
 // SetIOTimeout sets a timeout in microseconds to be passed to the underlying FileSystem for
@@ -277,7 +289,7 @@ func (opts *ReadOptions) GetDeadline() uint64 {
 // individual file read request. If a MultiGet/Get/Seek/Next etc call
 // results in multiple reads, each read can last upto io_timeout us.
 func (opts *ReadOptions) SetIOTimeout(microseconds uint64) {
-	C.rocksdb_readoptions_set_io_timeout(opts.c, C.uint64_t(microseconds))
+//	C.rocksdb_readoptions_set_io_timeout(opts.c, C.uint64_t(microseconds))
 }
 
 // GetIOTimeout gets timeout in microseconds to be passed to the underlying FileSystem for
@@ -285,7 +297,8 @@ func (opts *ReadOptions) SetIOTimeout(microseconds uint64) {
 // individual file read request. If a MultiGet/Get/Seek/Next etc call
 // results in multiple reads, each read can last upto io_timeout us.
 func (opts *ReadOptions) GetIOTimeout() uint64 {
-	return uint64(C.rocksdb_readoptions_get_io_timeout(opts.c))
+	//return uint64(C.rocksdb_readoptions_get_io_timeout(opts.c))
+	return 0
 }
 
 // Destroy deallocates the ReadOptions object.

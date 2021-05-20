@@ -92,18 +92,13 @@ func (transaction *Transaction) GetForUpdate(opts *ReadOptions, key []byte) (sli
 // GetForUpdateWithCF queries the data associated with the key and puts an exclusive lock on the key
 // from the database, with column family, given this transaction.
 func (transaction *Transaction) GetForUpdateWithCF(opts *ReadOptions, cf *ColumnFamilyHandle, key []byte) (slice *Slice, err error) {
+	/*
 	var (
 		cErr    *C.char
 		cValLen C.size_t
 		cKey    = byteToChar(key)
 	)
-
-	cValue := C.rocksdb_transaction_get_for_update_cf(
-		transaction.c, opts.c, cf.c, cKey, C.size_t(len(key)), &cValLen, C.uchar(byte(1)) /*exclusive*/, &cErr,
-	)
-	if err = fromCError(cErr); err == nil {
-		slice = NewSlice(cValue, cValLen)
-	}
+	*/
 
 	return
 }
@@ -158,6 +153,7 @@ func (transaction *Transaction) Merge(key, value []byte) (err error) {
 
 // MergeCF key, value to the transaction on specific column family.
 func (transaction *Transaction) MergeCF(cf *ColumnFamilyHandle, key, value []byte) (err error) {
+	/*
 	var (
 		cErr   *C.char
 		cKey   = byteToChar(key)
@@ -168,7 +164,7 @@ func (transaction *Transaction) MergeCF(cf *ColumnFamilyHandle, key, value []byt
 		transaction.c, cf.c, cKey, C.size_t(len(key)), cValue, C.size_t(len(value)), &cErr,
 	)
 	err = fromCError(cErr)
-
+	*/
 	return
 }
 

@@ -30,7 +30,8 @@ func (opts *WriteOptions) SetSync(value bool) {
 
 // IsSync returns if sync mode is turned on.
 func (opts *WriteOptions) IsSync() bool {
-	return charToBool(C.rocksdb_writeoptions_get_sync(opts.c))
+	//return charToBool(C.rocksdb_writeoptions_get_sync(opts.c))
+	return true
 }
 
 // DisableWAL sets whether WAL should be active or not.
@@ -44,7 +45,8 @@ func (opts *WriteOptions) DisableWAL(value bool) {
 
 // IsDisableWAL returns if we turned on DisableWAL flag for writing.
 func (opts *WriteOptions) IsDisableWAL() bool {
-	return charToBool(C.rocksdb_writeoptions_get_disable_WAL(opts.c))
+	//return charToBool(C.rocksdb_writeoptions_get_disable_WAL(opts.c))
+	return true
 }
 
 // SetIgnoreMissingColumnFamilies if true and if user is trying to write
@@ -64,7 +66,8 @@ func (opts *WriteOptions) SetIgnoreMissingColumnFamilies(value bool) {
 // write (don't return an error). If there are multiple writes in a WriteBatch,
 // other writes will succeed.
 func (opts *WriteOptions) IgnoreMissingColumnFamilies() bool {
-	return charToBool(C.rocksdb_writeoptions_get_ignore_missing_column_families(opts.c))
+	//return charToBool(C.rocksdb_writeoptions_get_ignore_missing_column_families(opts.c))
+	return true
 }
 
 // SetNoSlowdown if true and we need to wait or sleep for the write request, fails
@@ -72,12 +75,13 @@ func (opts *WriteOptions) IgnoreMissingColumnFamilies() bool {
 //
 // Default: false
 func (opts *WriteOptions) SetNoSlowdown(value bool) {
-	C.rocksdb_writeoptions_set_no_slowdown(opts.c, boolToChar(value))
+//	C.rocksdb_writeoptions_set_no_slowdown(opts.c, boolToChar(value))
 }
 
 // IsNoSlowdown returns no_slow_down setting.
 func (opts *WriteOptions) IsNoSlowdown() bool {
-	return charToBool(C.rocksdb_writeoptions_get_no_slowdown(opts.c))
+	//return charToBool(C.rocksdb_writeoptions_get_no_slowdown(opts.c))
+	return true
 }
 
 // SetLowPri if true, this write request is of lower priority if compaction is
@@ -93,7 +97,8 @@ func (opts *WriteOptions) SetLowPri(value bool) {
 
 // IsLowPri returns if the write request is of lower priority if compaction is behind.
 func (opts *WriteOptions) IsLowPri() bool {
-	return charToBool(C.rocksdb_writeoptions_get_low_pri(opts.c))
+	//return charToBool(C.rocksdb_writeoptions_get_low_pri(opts.c))
+	return true
 }
 
 // SetMemtableInsertHintPerBatch if true, this writebatch will maintain the last insert positions of each
@@ -104,13 +109,14 @@ func (opts *WriteOptions) IsLowPri() bool {
 //
 // Default: false
 func (opts *WriteOptions) SetMemtableInsertHintPerBatch(value bool) {
-	C.rocksdb_writeoptions_set_memtable_insert_hint_per_batch(opts.c, boolToChar(value))
+//	C.rocksdb_writeoptions_set_memtable_insert_hint_per_batch(opts.c, boolToChar(value))
 }
 
 // MemtableInsertHintPerBatch returns if this writebatch will maintain the last insert positions of each
 // memtable as hints in concurrent write.
 func (opts *WriteOptions) MemtableInsertHintPerBatch() bool {
-	return charToBool(C.rocksdb_writeoptions_get_memtable_insert_hint_per_batch(opts.c))
+	//return charToBool(C.rocksdb_writeoptions_get_memtable_insert_hint_per_batch(opts.c))
+	return true
 }
 
 // Destroy deallocates the WriteOptions object.

@@ -40,6 +40,7 @@ func OpenBackupEngine(opts *Options, path string) (be *BackupEngine, err error) 
 
 // OpenBackupEngineWithOpt opens a backup engine with specified options.
 func OpenBackupEngineWithOpt(opts *BackupableDBOptions, env *Env) (be *BackupEngine, err error) {
+	/*
 	var cErr *C.char
 	bEngine := C.rocksdb_backup_engine_open_opts(opts.c, env.c, &cErr)
 	if err = fromCError(cErr); err == nil {
@@ -47,7 +48,7 @@ func OpenBackupEngineWithOpt(opts *BackupableDBOptions, env *Env) (be *BackupEng
 			c: bEngine,
 		}
 	}
-
+	*/
 	return
 }
 
@@ -129,6 +130,7 @@ func (b *BackupEngine) RestoreDBFromLatestBackup(dbDir, walDir string, ro *Resto
 // RestoreDBFromBackup restores the backup (identified by its id) to dbDir. walDir
 // is where the write ahead logs are restored to and usually the same as dbDir.
 func (b *BackupEngine) RestoreDBFromBackup(dbDir, walDir string, ro *RestoreOptions, backupID uint32) (err error) {
+	/*
 	cDbDir := C.CString(dbDir)
 	cWalDir := C.CString(walDir)
 
@@ -138,6 +140,7 @@ func (b *BackupEngine) RestoreDBFromBackup(dbDir, walDir string, ro *RestoreOpti
 
 	C.free(unsafe.Pointer(cDbDir))
 	C.free(unsafe.Pointer(cWalDir))
+	*/
 	return
 }
 

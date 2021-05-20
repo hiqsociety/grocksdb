@@ -99,6 +99,7 @@ func OpenDbForReadOnly(opts *Options, name string, errorIfWalFileExists bool) (d
 // do not destroy the corresponding column family handle.
 // WAL tailing is not supported at present, but will arrive soon.
 func OpenDbAsSecondary(opts *Options, name, secondaryPath string) (db *DB, err error) {
+	/*
 	var (
 		cErr  *C.char
 		cName = C.CString(name)
@@ -116,6 +117,7 @@ func OpenDbAsSecondary(opts *Options, name, secondaryPath string) (db *DB, err e
 
 	C.free(unsafe.Pointer(cName))
 	C.free(unsafe.Pointer(cPath))
+	*/
 	return
 }
 
@@ -202,7 +204,7 @@ func OpenDbColumnFamiliesWithTTL(
 		return
 	}
 
-	cName := C.CString(name)
+	//cName := C.CString(name)
 	cNames := make([]*C.char, numColumnFamilies)
 	for i, s := range cfNames {
 		cNames[i] = C.CString(s)
@@ -213,8 +215,9 @@ func OpenDbColumnFamiliesWithTTL(
 		cOpts[i] = o.c
 	}
 
-	cHandles := make([]*C.rocksdb_column_family_handle_t, numColumnFamilies)
+	//cHandles := make([]*C.rocksdb_column_family_handle_t, numColumnFamilies)
 
+	/*
 	var cErr *C.char
 	_db := C.rocksdb_open_column_families_with_ttl(
 		opts.c,
@@ -242,6 +245,7 @@ func OpenDbColumnFamiliesWithTTL(
 	for _, s := range cNames {
 		C.free(unsafe.Pointer(s))
 	}
+	*/
 	return
 }
 
@@ -326,8 +330,8 @@ func OpenDbAsSecondaryColumnFamilies(
 		return
 	}
 
-	cName := C.CString(name)
-	cPath := C.CString(secondaryPath)
+	//cName := C.CString(name)
+	//cPath := C.CString(secondaryPath)
 
 	cNames := make([]*C.char, numColumnFamilies)
 	for i, s := range cfNames {
@@ -339,8 +343,9 @@ func OpenDbAsSecondaryColumnFamilies(
 		cOpts[i] = o.c
 	}
 
-	cHandles := make([]*C.rocksdb_column_family_handle_t, numColumnFamilies)
+	//cHandles := make([]*C.rocksdb_column_family_handle_t, numColumnFamilies)
 
+	/*
 	var cErr *C.char
 	_db := C.rocksdb_open_as_secondary_column_families(
 		opts.c,
@@ -369,6 +374,7 @@ func OpenDbAsSecondaryColumnFamilies(
 	for _, s := range cNames {
 		C.free(unsafe.Pointer(s))
 	}
+	*/
 	return
 }
 
@@ -407,6 +413,7 @@ func (db *DB) Name() string {
 // KeyMayExists the value is only allocated (using malloc) and returned if it is found and
 // value_found isn't NULL. In that case the user is responsible for freeing it.
 func (db *DB) KeyMayExists(opts *ReadOptions, key []byte, timestamp string) (slice *Slice) {
+	/*
 	t := []byte(timestamp)
 
 	var (
@@ -426,13 +433,14 @@ func (db *DB) KeyMayExists(opts *ReadOptions, key []byte, timestamp string) (sli
 	if charToBool(cFound) {
 		slice = NewSlice(cValue, cValLen)
 	}
-
+	*/
 	return
 }
 
 // KeyMayExistsCF the value is only allocated (using malloc) and returned if it is found and
 // value_found isn't NULL. In that case the user is responsible for freeing it.
 func (db *DB) KeyMayExistsCF(opts *ReadOptions, cf *ColumnFamilyHandle, key []byte, timestamp string) (slice *Slice) {
+	/*
 	t := []byte(timestamp)
 
 	var (
@@ -453,7 +461,7 @@ func (db *DB) KeyMayExistsCF(opts *ReadOptions, cf *ColumnFamilyHandle, key []by
 	if charToBool(cFound) {
 		slice = NewSlice(cValue, cValLen)
 	}
-
+	*/
 	return
 }
 
@@ -691,6 +699,7 @@ func (db *DB) DeleteCF(opts *WriteOptions, cf *ColumnFamilyHandle, key []byte) (
 
 // DeleteRangeCF deletes keys that are between [startKey, endKey)
 func (db *DB) DeleteRangeCF(opts *WriteOptions, cf *ColumnFamilyHandle, startKey []byte, endKey []byte) (err error) {
+	/*
 	var (
 		cErr      *C.char
 		cStartKey = byteToChar(startKey)
@@ -699,7 +708,7 @@ func (db *DB) DeleteRangeCF(opts *WriteOptions, cf *ColumnFamilyHandle, startKey
 
 	C.rocksdb_delete_range_cf(db.c, opts.c, cf.c, cStartKey, C.size_t(len(startKey)), cEndKey, C.size_t(len(endKey)), &cErr)
 	err = fromCError(cErr)
-
+	*/
 	return
 }
 
@@ -864,9 +873,11 @@ func (db *DB) GetIntProperty(propName string) (value uint64, success bool) {
 // GetIntPropertyCF similar to `GetProperty`, but only works for a subset of properties whose
 // return value is an integer. Return the value by integer.
 func (db *DB) GetIntPropertyCF(propName string, cf *ColumnFamilyHandle) (value uint64, success bool) {
+	/*
 	cProp := C.CString(propName)
 	success = C.rocksdb_property_int_cf(db.c, cf.c, cProp, (*C.uint64_t)(&value)) == 0
 	C.free(unsafe.Pointer(cProp))
+	*/
 	return
 }
 
@@ -902,6 +913,7 @@ func (db *DB) CreateColumnFamily(opts *Options, name string) (handle *ColumnFami
 // CONSTRAINTS:
 // Not specifying/passing or non-positive TTL behaves like TTL = infinity
 func (db *DB) CreateColumnFamilyWithTTL(opts *Options, name string, ttl C.int) (handle *ColumnFamilyHandle, err error) {
+	/*
 	var (
 		cErr  *C.char
 		cName = C.CString(name)
@@ -913,6 +925,7 @@ func (db *DB) CreateColumnFamilyWithTTL(opts *Options, name string, ttl C.int) (
 	}
 
 	C.free(unsafe.Pointer(cName))
+	*/
 	return
 }
 
@@ -957,7 +970,7 @@ func (db *DB) GetApproximateSizes(ranges []Range) ([]uint64, error) {
 		&cLimits[0],
 		&cLimitLens[0],
 		(*C.uint64_t)(&sizes[0]),
-		&cErr,
+	//	&cErr,
 	)
 
 	// parse error
@@ -1004,7 +1017,7 @@ func (db *DB) GetApproximateSizesCF(cf *ColumnFamilyHandle, ranges []Range) ([]u
 		&cLimits[0],
 		&cLimitLens[0],
 		(*C.uint64_t)(&sizes[0]),
-		&cErr,
+	//	&cErr,
 	)
 
 	// parse error
@@ -1061,6 +1074,7 @@ func (db *DB) SetOptionsCF(cf *ColumnFamilyHandle, keys, values []string) (err e
 		cValues[i] = C.CString(values[i])
 	}
 
+	/*
 	var cErr *C.char
 
 	C.rocksdb_set_options_cf(
@@ -1072,7 +1086,7 @@ func (db *DB) SetOptionsCF(cf *ColumnFamilyHandle, keys, values []string) (err e
 		&cErr,
 	)
 	err = fromCError(cErr)
-
+	*/
 	return
 }
 
@@ -1162,11 +1176,12 @@ func (db *DB) Flush(opts *FlushOptions) (err error) {
 
 // FlushCF triggers a manuel flush for the database on specific column family.
 func (db *DB) FlushCF(cf *ColumnFamilyHandle, opts *FlushOptions) (err error) {
+	/*
 	var cErr *C.char
 
 	C.rocksdb_flush_cf(db.c, opts.c, cf.c, &cErr)
 	err = fromCError(cErr)
-
+	*/
 	return
 }
 
@@ -1314,15 +1329,17 @@ func (db *DB) NewCheckpoint() (cp *Checkpoint, err error) {
 // do not destroy the corresponding column family handle.
 // WAL tailing is not supported at present, but will arrive soon.
 func (db *DB) TryCatchUpWithPrimary() (err error) {
+	/*
 	var cErr *C.char
 	C.rocksdb_try_catch_up_with_primary(db.c, &cErr)
 	err = fromCError(cErr)
+	*/
 	return
 }
 
 // CancelAllBackgroundWork requests stopping background work, if wait is true wait until it's done
 func (db *DB) CancelAllBackgroundWork(wait bool) {
-	C.rocksdb_cancel_all_background_work(db.c, boolToChar(wait))
+	//C.rocksdb_cancel_all_background_work(db.c, boolToChar(wait))
 }
 
 // Close closes the database.

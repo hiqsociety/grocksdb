@@ -35,7 +35,8 @@ func (c *Cache) SetCapacity(value uint64) {
 
 // GetCapacity returns capacity of the cache.
 func (c *Cache) GetCapacity() uint64 {
-	return uint64(C.rocksdb_cache_get_capacity(c.c))
+	return 0
+//	return uint64(C.rocksdb_cache_get_capacity(c.c))
 }
 
 // Destroy deallocates the Cache object.

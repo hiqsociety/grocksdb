@@ -85,8 +85,8 @@ func (wb *WriteBatch) Delete(key []byte) {
 //
 // Note: consider setting options.sync = true.
 func (wb *WriteBatch) SingleDelete(key []byte) {
-	cKey := byteToChar(key)
-	C.rocksdb_writebatch_singledelete(wb.c, cKey, C.size_t(len(key)))
+	//cKey := byteToChar(key)
+	//C.rocksdb_writebatch_singledelete(wb.c, cKey, C.size_t(len(key)))
 }
 
 // DeleteCF queues a deletion of the data at key in a column family.
@@ -97,8 +97,8 @@ func (wb *WriteBatch) DeleteCF(cf *ColumnFamilyHandle, key []byte) {
 
 // SingleDeleteCF same as SingleDelete but specific column family
 func (wb *WriteBatch) SingleDeleteCF(cf *ColumnFamilyHandle, key []byte) {
-	cKey := byteToChar(key)
-	C.rocksdb_writebatch_singledelete_cf(wb.c, cf.c, cKey, C.size_t(len(key)))
+	//cKey := byteToChar(key)
+	//C.rocksdb_writebatch_singledelete_cf(wb.c, cf.c, cKey, C.size_t(len(key)))
 }
 
 // DeleteRange deletes keys that are between [startKey, endKey)

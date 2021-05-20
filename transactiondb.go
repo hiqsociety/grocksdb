@@ -66,8 +66,9 @@ func OpenTransactionDbColumnFamilies(
 		cOpts[i] = o.c
 	}
 
-	cHandles := make([]*C.rocksdb_column_family_handle_t, numColumnFamilies)
+	//cHandles := make([]*C.rocksdb_column_family_handle_t, numColumnFamilies)
 
+	/*
 	var cErr *C.char
 	_db := C.rocksdb_transactiondb_open_column_families(
 		opts.c,
@@ -91,6 +92,7 @@ func OpenTransactionDbColumnFamilies(
 			cfHandles[i] = NewNativeColumnFamilyHandle(c)
 		}
 	}
+	*/
 
 	C.free(unsafe.Pointer(cName))
 	for _, s := range cNames {
@@ -216,6 +218,7 @@ func (db *TransactionDB) Merge(opts *WriteOptions, key, value []byte) (err error
 
 // MergeCF writes data associated with a key to the database on specific column family.
 func (db *TransactionDB) MergeCF(opts *WriteOptions, cf *ColumnFamilyHandle, key, value []byte) (err error) {
+	/*
 	var (
 		cErr   *C.char
 		cKey   = byteToChar(key)
@@ -226,7 +229,7 @@ func (db *TransactionDB) MergeCF(opts *WriteOptions, cf *ColumnFamilyHandle, key
 		db.c, opts.c, cf.c, cKey, C.size_t(len(key)), cValue, C.size_t(len(value)), &cErr,
 	)
 	err = fromCError(cErr)
-
+	*/
 	return
 }
 
@@ -306,8 +309,9 @@ func (db *TransactionDB) NewIterator(opts *ReadOptions) *Iterator {
 // NewIteratorCF returns an Iterator over the the database and column family
 // that uses the ReadOptions given.
 func (db *TransactionDB) NewIteratorCF(opts *ReadOptions, cf *ColumnFamilyHandle) *Iterator {
-	cIter := C.rocksdb_transactiondb_create_iterator_cf(db.c, opts.c, cf.c)
-	return NewNativeIterator(unsafe.Pointer(cIter))
+	//cIter := C.rocksdb_transactiondb_create_iterator_cf(db.c, opts.c, cf.c)
+	//return NewNativeIterator(unsafe.Pointer(cIter))
+	return NewNativeIterator(nil)
 }
 
 // Close closes the database.

@@ -190,7 +190,7 @@ func (opts *BlockBasedTableOptions) SetIndexType(value IndexType) {
 
 // SetDataBlockIndexType sets data block index type
 func (opts *BlockBasedTableOptions) SetDataBlockIndexType(value DataBlockIndexType) {
-	C.rocksdb_block_based_options_set_data_block_index_type(opts.c, C.int(value))
+	//C.rocksdb_block_based_options_set_data_block_index_type(opts.c, C.int(value))
 }
 
 // SetDataBlockHashRatio is valid only when data_block_hash_index_type is
@@ -198,7 +198,7 @@ func (opts *BlockBasedTableOptions) SetDataBlockIndexType(value DataBlockIndexTy
 //
 // Default value: 0.75
 func (opts *BlockBasedTableOptions) SetDataBlockHashRatio(value float64) {
-	C.rocksdb_block_based_options_set_data_block_hash_ratio(opts.c, C.double(value))
+	//C.rocksdb_block_based_options_set_data_block_hash_ratio(opts.c, C.double(value))
 }
 
 // SetIndexBlockRestartInterval same as block_restart_interval but used for the index block.
